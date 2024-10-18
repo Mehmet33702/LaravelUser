@@ -13,13 +13,15 @@ class ForgotPasswordController extends Controller
 
     public function sendResetLinkEmail(Request $request){
         $request->validate(['email' =>'required|email']);
+
+        //laravel şifre token oluşturuyor
         $status=Password::sendResetLink(
             $request->only('email')
         );
 
         return $status === Password::RESET_LINK_SENT
-            ? back()->withSuccess(_($status))
-            : back()->withError(['email'=>_($status)]);
+            ? back()->withSuccess(__($status))
+            : back()->withError(['email'=>__($status)]);
     }
 
 
