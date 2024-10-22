@@ -43,6 +43,9 @@ class CustomAuthController extends Controller
 
     public function logout(Request $request){
         Auth::logout();
+        request()->session()->flush();
+        request()->session()->regenerate();
+
         return redirect()->to('login')
             ->withSuccess('Başarıyla Çıkış Yapıldı.');
     }
